@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+
+<body>
+    <h3>Exemplo simples de JS atualizando dados na página</h3>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rem sit animi voluptate quod recusandae accusamus
+        provident dolores tempore a.</p>
+
+    <h3>Qual será o texto a seguir?</h3>
+
+    <p id="texto"></p>
+
+    <button id="botao">Apresentar Texto</button>
+
+    <script>
+        document.querySelector('#botao').addEventListener('click', () => {
+            // XMLHttpRequest - novo objeto para a requisição
+            let request = new XMLHttpRequest()
+
+            // preparar o request
+            // método, url, async
+            request.open('get', 'http://localhost/js-ajax/aula_02/exemplo_02/texto.txt', true)
+
+            // preparar uma função callback - função que trata a resposta
+            request.onreadystatechange = function () {
+
+                // propriedades do request
+                console.log(request.readyState, request.status)
+
+            }
+
+            // efetuar o pedido
+            request.send()
+        })
+    </script>
+</body>
+
+</html>

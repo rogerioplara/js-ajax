@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+
+<body>
+    <h3>Exemplo simples de JS atualizando dados na página</h3>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rem sit animi voluptate quod recusandae accusamus
+        provident dolores tempore a.</p>
+
+    <h3>Qual será o texto a seguir?</h3>
+
+    <p id="texto"></p>
+
+    <button id="botao">Apresentar Texto</button>
+
+    <script>
+        document.querySelector('#botao').addEventListener('click', () => {
+            document.querySelector('#texto').textContent = "Texto inserido a partir do Javascript"
+        })
+    </script>
+</body>
+
+</html>
