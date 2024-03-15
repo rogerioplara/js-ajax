@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+<img src="" alt="">
+
+<body>
+
+    <p>Lista completa de paises <span id="total"></span>:</p>
+
+    <ul id="lista"></ul>
+
+    <script>
+        // https://restcountries.com/
+
+        let req = new XMLHttpRequest();
+        req.open('get', 'https://restcountries.com/v3.1/all', true)
+        req.onload = function () {
+            if (req.status === 200) {
+
+                let paises = JSON.parse(req.response)
+
+                let lista = document.querySelector('#lista')
+
+                // paises.forEach(pais => {
+                //     let li = document.createElement('li')
+                //     li.textContent = pais.name.common
+                //     lista.appendChild(li)
+                // });
+
+                let lista_final = []
+                paises.forEach(pais => {
+                    lista_final.push(pais.name.common)
+                });
+
+                lista_final.sort()
+
+                lista_final.forEach(pais => {
+                    let li = document.createElement('li')
+                    li.textContent = pais
+                    lista.appendChild(li)
+                });
+
+            }
+        }
+        req.send()
+    </script>
+</body>
+
+</html>

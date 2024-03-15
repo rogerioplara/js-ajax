@@ -11,3 +11,12 @@ Permite receber e enviar dados em diversos formatos:
 - JSON
 - HTML 
 - TXT
+
+### O que é o JS síncrono e assíncrono (sync/async)
+
+Fetch - executado de forma assíncrona, retorna uma promise
+
+### Callbacks
+
+Função passada como argumento para outra função
+
