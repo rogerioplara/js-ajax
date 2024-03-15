@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+<img src="" alt="">
+
+<body>
+
+    <script>
+        // https://restcountries.com/
+
+        let req = new XMLHttpRequest();
+        req.open('get', 'https://restcountries.com/v3.1/all', true)
+        req.onload = function () {
+            if (req.status === 200) {
+
+                let paises = JSON.parse(req.response)
+
+                let nome_pais = 'Angola'
+
+                let pais = paises.find((p) => {
+                    return p.name.common === nome_pais
+                })
+
+                if (typeof pais !== 'undefined') {
+
+                    // propriedades do pais
+                    // name.common
+                    // capital
+                    // flags.png
+
+                    // elemento nome do país
+                    let elemento_nome_pais = document.createElement('h1')
+                    elemento_nome_pais.textContent = pais.name.common
+                    document.body.appendChild(elemento_nome_pais)
+
+                    // elemento capital do pais
+                    let elemento_capital = document.createElement('h3')
+                    elemento_capital.textContent = pais.capital
+                    document.body.appendChild(elemento_capital)
+
+                    // elemento bandeira do pais
+                    let elemento_bandeira = document.createElement('img')
+                    elemento_bandeira.src = pais.flags.png
+                    document.body.appendChild(elemento_bandeira)
+
+                } else {
+                    console.log('País não encontrado')
+                }
+
+            }
+        }
+        req.send()
+    </script>
+</body>
+
+</html>

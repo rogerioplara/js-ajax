@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+
+<body>
+    <h3>Lista de clientes</h3>
+    <hr>
+    <button id="btn_cliente">Carregar clientes</button>
+
+    <div id="results" style="display: none;">
+        <table id="table_results" border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <p id="no_results" style="display: none;">Não foram encontrados registros de clientes</p>
+
+    <script>
+
+        document.querySelector('#btn_cliente').addEventListener('click', () => {
+
+            // instancia do objeto
+            let request = new XMLHttpRequest()
+            // abertura do request
+            request.open('get', 'http://localhost/js-ajax/aula_06/dados_vazio.json', true)
+
+            // preparacao do request
+            request.onload = function () {
+
+                // coloca os dois componentes invisíveis
+                document.querySelector('#results').style.display = 'none';
+                document.querySelector('#no_results').style.display = 'none';
+
+                const table = document.querySelector('#table_results tbody')
+
+                // apresenta os resultados na tabela
+                let clientes = JSON.parse(this.response)
+                if (clientes.length > 0) {
+                    clientes.forEach(cliente => {
+                        // cria uma linha na tabela para cada cliente
+                        let tr = document.createElement('tr')
+
+                        // cria o primeiro td da tabela e insere o nome
+                        let td_nome = document.createElement('td')
+                        td_nome.innerHTML = cliente.nome
+
+                        // cria o segundo td da tabela e insere o telefone
+                        let td_telefone = document.createElement('td')
+                        td_telefone.innerHTML = cliente.telefone
+
+                        // cria o terceiro td da tabala e insere o email
+                        let td_email = document.createElement('td')
+                        td_email.innerHTML = cliente.email
+
+                        // insere os elementos criados na linha
+                        tr.appendChild(td_nome)
+                        tr.appendChild(td_telefone)
+                        tr.appendChild(td_email)
+
+                        // insere a linha na tabela
+                        table.appendChild(tr)
+                    });
+
+                    document.querySelector('#results').style.display = 'block';
+
+                } else {
+                    document.querySelector('#no_results').style.display = 'block';
+                }
+
+
+            }
+
+            request.send()
+        })
+
+    </script>
+</body>
+
+</html>
