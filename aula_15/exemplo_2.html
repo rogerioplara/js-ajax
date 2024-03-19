@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <ul></ul>
+
+
+    <script>
+
+        fetch('https://restcountries.com/v3.1/all') // requisição dos dados
+            .then(response => response.json()) // converte a resposta para json e retorna para continuar o then
+            .then(paises => { // recebe a response com o nome 'paises'
+                let ul = document.querySelector('ul') // seleciona a lista
+                paises.forEach(pais => { // percorre a resposta
+                    let li = document.createElement('li') // cria um li para cada elemento da resposta
+                    li.textContent = pais.name.common // adiciona o nome do pais a cada elemento criado
+                    ul.appendChild(li) // insere na lista
+                });
+            })
+
+        async function getPaises() {
+            let dados = await fetch('https://restcountries.com/v3.1/all')
+            let paises = await dados.json()
+            console.log(paises) // aqui poderia ser feito o foreach para mostrar os elementos
+        }
+        getPaises()
+
+    </script>
+</body>
+
+</html>

@@ -16,7 +16,14 @@
         Como a fetch api sempre retorna uma promise, podemos usar os métodos .then, .catch e .finally
         */
 
-        console.log(fetch('https://restcountries.com/v3.1/all'))
+        // console.log(fetch('https://restcountries.com/v3.1/all'))
+
+        fetch('https://restcountries.com/v3.1/all')
+            .then(response => {
+                return response.json()
+            })
+            .then(paises => console.log(paises))
+
 
 
     </script>

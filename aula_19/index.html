@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+
+<body>
+
+    <h3>Lista de clientes JSON</h3>
+    <ul id="lista_clientes"></ul>
+    <button id="btn_ajax">Carregar lista de clientes</button>
+
+    <script>
+
+        document.querySelector('#btn_ajax').addEventListener('click', () => {
+            fetch('http://localhost/js-ajax/recursos_online/ficheiros/clients_1.json')
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json()
+                    }
+                    throw Error('Dados não encontrados')
+                })
+                .then(clientes => {
+                    let ul = document.querySelector('#lista_clientes')
+                    clientes.forEach(cliente => {
+                        let li = document.createElement('li')
+                        li.innerHTML = `<strong>${cliente.name}</strong> | ${cliente.email} | ${cliente.phone}`
+                        ul.appendChild(li)
+                    });
+                })
+                .catch(err => {
+                    let err_message = document.createElement('p')
+                    err_message.style.color = 'red'
+                    err_message.textContent = err.message
+                    document.body.appendChild(err_message)
+                })
+        })
+
+    </script>
+</body>
+
+</html>

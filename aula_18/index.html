@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+
+<body>
+
+    <h3>Deverá ser apresentado um artigo no espaço abaixo</h3>
+    <div id="artigo"></div>
+    <button id="btn_ajax">Carregar artigo</button>
+
+    <script>
+
+        document.querySelector('#btn_ajax').addEventListener('click', () => {
+            fetch('http://localhost/js-ajax/recursos_online/ficheiros/article_.html')
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.text()
+                    }
+                    throw Error('Não foi possível encontrar o artigo')
+                })
+                .then(html_content => {
+                    document.querySelector('#btn_ajax').innerHTML = html_content
+                })
+                .catch(err => {
+                    let err_message = document.createElement('p')
+                    err_message.style.color = 'red'
+                    err_message.textContent = err.message
+                    document.body.appendChild(err_message)
+                })
+        })
+
+    </script>
+</body>
+
+</html>
